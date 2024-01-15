@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secret Code</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        font-family: "Arial", sans-serif;
+        background-color: black;
+        color: red;
+        font-size: 50px;
+      }
+
+      input {
+        height: 50px;
+        width: 500px;
+        font-size: 50px;
+        margin-bottom: 50px;
+      }
+      button {
+        height: 100px;
+        width: 300px;
+        font-size: 50px;
+      }
+      p {
+        font-size: 100px;
+        font-weight: 700;
+      }
+
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      #loveMessage {
+        display: none;
+        margin-top: 20px;
+        font-size: 24px;
+        border: 2px solid red;
+      }
+
+      #heart {
+        color: red;
+        font-size: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <label for="secretCode" id="label">Use secret code to open:</label>
+    <input type="password" id="secretCode" />
+    <button onclick="checkSecretCode()">Open</button>
+    <p id="result"></p>
+
+    <div id="loveMessage">
+      <p id="heart">&#10084;</p>
+      <p>ILOVEYOUSOMUCHDIKSHYA</p>
+    </div>
+
+    <script>
+      const correctSecretCode = "march26"; // Replace with your actual secret code
+      let incorrectAttempts = 0;
+
+      function checkSecretCode() {
+        const inputElement = document.getElementById("secretCode");
+        const resultElement = document.getElementById("result");
+        const loveMessage = document.getElementById("loveMessage");
+        const labelElement = document.getElementById("label");
+
+        const enteredCode = inputElement.value;
+
+        if (enteredCode === correctSecretCode) {
+          // Hide input, button, and label elements
+          inputElement.style.display = "none";
+          document.querySelector("button").style.display = "none";
+          labelElement.style.display = "none";
+
+          // Show love message
+          loveMessage.style.display = "block";
+
+          // Reset incorrect attempts
+          incorrectAttempts = 0;
+
+          // Clear the result message
+          resultElement.textContent = "";
+        } else {
+          incorrectAttempts++;
+
+          if (incorrectAttempts < 3) {
+            resultElement.textContent = "Incorrect secret code. Try again.";
+          } else if (incorrectAttempts === 3 || incorrectAttempts === 5) {
+            resultElement.textContent =
+              "Incorrect secret code. Try again. Hint: Date";
+          } else {
+            resultElement.textContent = "Incorrect secret code. Try again.";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
